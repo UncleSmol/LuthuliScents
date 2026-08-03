@@ -24,8 +24,6 @@ h1, h2, h3, h4, h5, h6 {
     letter-spacing: .01em;
 }
 
-p, label, div { color: #221E17; }
-
 a { color: #221E17; }
 
 .block-container {
@@ -68,6 +66,9 @@ div[data-testid="stSidebar"] { background: #F4F0E6; }
     box-shadow: none !important;
     transition: background .2s ease, color .2s ease, border-color .2s ease !important;
 }
+.stButton > button *, .stFormSubmitButton > button *, .stLinkButton > a * {
+    color: inherit !important;
+}
 .stButton > button:hover, .stFormSubmitButton > button:hover, .stLinkButton > a:hover {
     background: #221E17 !important;
     color: #FAF7F0 !important;
@@ -77,6 +78,9 @@ div[data-testid="stSidebar"] { background: #F4F0E6; }
     background: #221E17 !important;
     color: #FAF7F0 !important;
     border-color: #221E17 !important;
+}
+.stButton > button[kind="primary"] * , .stFormSubmitButton > button[kind="primary"] * {
+    color: inherit !important;
 }
 .stButton > button[kind="primary"]:hover, .stFormSubmitButton > button[kind="primary"]:hover {
     background: #A98A4C !important;
