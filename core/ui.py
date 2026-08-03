@@ -41,17 +41,19 @@ def statement(text: str, mark: str | None = None) -> None:
 
 
 def product_card(p: dict) -> str:
-    badge = f'<div class="p-badge">{p["badge"]}</div>' if p.get("badge") else ""
-    return f"""
-    <div class="p-card">
-        <img src="data:image/jpeg;base64,{img_b64(p['image'])}" alt="{p['name']}">
-        {badge}
-        <div class="p-name">{p['name']}</div>
-        <div class="p-family">{p['family']} &middot; {p['size']}</div>
-        <div class="p-notes">{p['notes']}</div>
-        <div class="p-price">R{p['price']:.2f}</div>
-    </div>
-    """
+    parts = [f'<img src="data:image/jpeg;base64,{img_b64(p["image"])}" alt="{p["name"]}">']
+    if p.get("badge"):
+        parts.append(f'<div class="p-badge">{p["badge"]}</div>')
+    parts.extend(
+        [
+            f'<div class="p-name">{p["name"]}</div>',
+            f'<div class="p-family">{p["family"]} &middot; {p["size"]}</div>',
+            f'<div class="p-notes">{p["notes"]}</div>',
+            f'<div class="p-price">R{p["price"]:.2f}</div>',
+        ]
+    )
+    inner = "\n    ".join(parts)
+    return f'<div class="p-card">\n    {inner}\n</div>'
 
 
 def render_product(p: dict, key_prefix: str) -> None:
