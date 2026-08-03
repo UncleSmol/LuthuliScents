@@ -5,7 +5,7 @@ import base64
 import streamlit as st
 
 from core.session import add
-from products import SOCIAL_LINKS
+from core.socials import social_row
 
 
 @st.cache_data(show_spinner=False)
@@ -74,14 +74,11 @@ def quote(text: str, who: str) -> None:
 
 
 def render_footer() -> None:
-    links = "".join(
-        f'<a href="{url}" target="_blank">{name}</a>' for name, url in SOCIAL_LINKS.items()
-    )
     st.markdown(
         f"""
         <div class="footer">
             <div class="brand">LUTHULISCENTS</div>
-            <div class="links">{links}</div>
+            {social_row()}
             <div class="fine">Golden Luxury Perfumes &middot; Hand-made in South Africa &middot; © 2026</div>
         </div>
         """,

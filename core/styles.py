@@ -229,16 +229,33 @@ hr { border: none; border-top: 1px solid #E7E0D0; margin: 36px 0; }
     letter-spacing: .03em;
 }
 .footer .brand { font-family: 'Playfair Display', serif; font-size: 1rem; color: #221E17; letter-spacing: .1em; }
-.footer .links { margin: 16px 0; }
-.footer a {
-    color: #221E17;
-    text-decoration: none;
-    margin: 0 12px;
-    font-size: .72rem;
-    letter-spacing: .12em;
-    text-transform: uppercase;
+.footer .social {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin: 18px 0 6px;
 }
-.footer a:hover { color: #A98A4C; }
+.footer .social-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    margin: 0;
+    border: 1px solid #E7E0D0;
+    border-radius: 50%;
+    text-decoration: none;
+    transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+}
+.footer .social-link:hover {
+    transform: translateY(-2px);
+    border-color: transparent;
+    box-shadow: 0 6px 16px rgba(31, 27, 20, .12);
+}
+.footer .social-link svg { width: 17px; height: 17px; display: block; }
+.footer .social-link svg path { fill: #A98A4C; transition: fill .25s ease; }
+.footer .social-link:hover svg path { fill: var(--g); }
 .footer .fine { color: #A39A87; font-size: .74rem; margin-top: 14px; }
 
 /* ---------- material symbols (sparingly) ---------- */

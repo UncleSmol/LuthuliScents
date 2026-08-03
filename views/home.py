@@ -48,8 +48,11 @@ def render() -> None:
     st.markdown("---")
     section_heading("Stay in touch", "Join the VIP list")
     st.caption("Early access to new drops, restocks and private sales.")
-    nl1, nl2, _ = st.columns([2, 1, 1])
-    email = nl1.text_input("Email address", key="newsletter_email", placeholder="you@example.com")
+    nl1, nl2 = st.columns([3, 1])
+    email = nl1.text_input(
+        "Email address", key="newsletter_email", placeholder="you@example.com",
+        label_visibility="collapsed",
+    )
     if nl2.button("Subscribe", key="newsletter_btn", type="primary"):
         if email and "@" in email:
             st.success("Welcome to the LuthuliScents VIP list.")
