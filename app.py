@@ -1,7 +1,7 @@
 """LuthuliScents — Golden Luxury Perfumes.
 
 Composition root: page config, global styling, session init and navigation.
-Each screen lives in its own module under ``pages/``.
+Each screen lives in its own module under ``views/``.
 """
 
 import streamlit as st
@@ -11,7 +11,7 @@ from core.session import count, init
 from core.styles import inject_css
 from products import SOCIAL_LINKS
 
-from pages import about, cart, contact, home, shop
+from views import about, cart, contact, home, shop
 
 st.set_page_config(
     page_title="LuthuliScents — Golden Luxury Perfumes",
