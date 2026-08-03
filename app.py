@@ -26,10 +26,9 @@ init()
 with st.sidebar:
     st.image("logo.jpeg", width=120)
     cart_count = count()
-    cart_label = f"Cart ({cart_count})" if cart_count else "Cart"
     page = option_menu(
         menu_title=None,
-        options=["Home", "Shop", cart_label, "About", "Contact"],
+        options=["Home", "Shop", "Cart", "About", "Contact"],
         default_index=0,
         key="main_nav",
         styles={
@@ -38,8 +37,12 @@ with st.sidebar:
             "nav-link-selected": {"background-color": "transparent", "color": "#221E17"},
         },
     )
+    if cart_count:
+        st.caption(f"Cart: {cart_count} item{'s' if cart_count != 1 else ''}")
     st.markdown("<hr>", unsafe_allow_html=True)
     st.link_button("WhatsApp", SOCIAL_LINKS["WhatsApp"])
+
+page = (page or "Home").split(" (")[0]
 
 if page == "Home":
     home.render()

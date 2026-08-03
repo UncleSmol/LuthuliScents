@@ -39,7 +39,7 @@ PRODUCTS = [
         "occasions": "Cooler days · Evenings · Winter",
         "pay_link": "https://pay.yoco.com/r/mEbKMD",
         "featured": False,
-        "badge": None,
+        "badge": "Limited",
     },
     {
         "key": "woody",
@@ -67,7 +67,7 @@ PRODUCTS = [
         "occasions": "Evenings · Gala · Signature",
         "pay_link": "https://pay.yoco.com/r/7KEK5q",
         "featured": False,
-        "badge": None,
+        "badge": "Evening",
     },
     {
         "key": "sweetapple-rose",
