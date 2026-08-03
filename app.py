@@ -14,8 +14,8 @@ from products import SOCIAL_LINKS
 from pages import about, cart, contact, home, shop
 
 st.set_page_config(
-    page_title="Golden Luxury Perfumes — LuthuliScents",
-    page_icon="🌸",
+    page_title="LuthuliScents — Golden Luxury Perfumes",
+    page_icon="logo.jpeg",
     layout="wide",
     initial_sidebar_state="collapsed",
 )
@@ -24,25 +24,22 @@ inject_css()
 init()
 
 with st.sidebar:
-    st.image("logo.jpeg", width=140)
+    st.image("logo.jpeg", width=120)
     cart_count = count()
     cart_label = f"Cart ({cart_count})" if cart_count else "Cart"
     page = option_menu(
-        menu_title="LuthuliScents",
+        menu_title=None,
         options=["Home", "Shop", cart_label, "About", "Contact"],
-        icons=["house-fill", "bag-fill", "cart-fill", "stars", "envelope-fill"],
         default_index=0,
         key="main_nav",
         styles={
-            "container": {"background-color": "#1a0f08", "border": "1px solid rgba(212,175,55,.2)", "border-radius": "14px"},
-            "icon": {"color": "#c9a24b"},
-            "nav-link": {"color": "#f7e7c6", "font-size": "0.95rem", "text-align": "left"},
-            "nav-link-selected": {"background-color": "#c9a24b", "color": "#1a140f"},
+            "container": {"background-color": "transparent", "padding": "0"},
+            "nav-link": {"color": "#7A7263", "font-size": "0.8rem", "text-align": "left"},
+            "nav-link-selected": {"background-color": "transparent", "color": "#221E17"},
         },
     )
-    st.markdown("---")
-    st.markdown("**Need help?**")
-    st.link_button("Chat on WhatsApp", SOCIAL_LINKS["WhatsApp"], icon=":material/chat:")
+    st.markdown("<hr>", unsafe_allow_html=True)
+    st.link_button("WhatsApp", SOCIAL_LINKS["WhatsApp"])
 
 if page == "Home":
     home.render()

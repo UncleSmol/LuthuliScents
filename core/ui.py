@@ -1,10 +1,9 @@
-"""Reusable UI building blocks shared across pages."""
+"""Reusable UI building blocks shared across pages (minimal luxury style)."""
 
 import base64
 
 import streamlit as st
 
-from core.icons import icon
 from core.session import add
 from products import SOCIAL_LINKS
 
@@ -15,27 +14,30 @@ def img_b64(path: str) -> str:
         return base64.b64encode(f.read()).decode()
 
 
-def page_header() -> None:
+def masthead() -> None:
     st.markdown(
         """
-        <div class="hero">
-            <div class="eyebrow">Luxury fragrance house</div>
-            <h1>✨ Golden Luxury Perfumes</h1>
-            <p>Hand-crafted, artisan scents designed to feel timeless, bold and
-            unforgettable. Made from scratch, priced to smell expensive without
-            spending much.</p>
+        <div class="masthead">
+            <div class="eyebrow">Luxury Fragrance House</div>
+            <h1>Golden Luxury Perfumes</h1>
+            <p>Hand-crafted artisan scents, blended from scratch and made to last.
+            Luxury quality, without the luxury markup.</p>
         </div>
         """,
         unsafe_allow_html=True,
     )
 
 
-def section_title(icon_name: str, text: str) -> None:
+def section_heading(label: str, title: str) -> None:
     st.markdown(
-        f"<h3 style='font-family: Playfair Display, serif;'>"
-        f"{icon(icon_name, size='1.4rem', color='#f2d27b')} {text}</h3>",
+        f'<div class="sec-head"><div class="label">{label}</div><h2>{title}</h2></div>',
         unsafe_allow_html=True,
     )
+
+
+def statement(text: str, mark: str | None = None) -> None:
+    inner = f'<span class="mark">{mark}</span> {text}' if mark else text
+    st.markdown(f'<div class="statement">{inner}</div>', unsafe_allow_html=True)
 
 
 def product_card(p: dict) -> str:
@@ -45,8 +47,7 @@ def product_card(p: dict) -> str:
         <img src="data:image/jpeg;base64,{img_b64(p['image'])}" alt="{p['name']}">
         {badge}
         <div class="p-name">{p['name']}</div>
-        <div class="p-family">{p['family']} · {p['size']}</div>
-        <div class="p-tag">{p['tagline']}</div>
+        <div class="p-family">{p['family']} &middot; {p['size']}</div>
         <div class="p-notes">{p['notes']}</div>
         <div class="p-price">R{p['price']:.2f}</div>
     </div>
@@ -55,31 +56,17 @@ def product_card(p: dict) -> str:
 
 def render_product(p: dict, key_prefix: str) -> None:
     st.markdown(product_card(p), unsafe_allow_html=True)
-    st.markdown("---")
+    st.markdown('<div style="height:14px;"></div>', unsafe_allow_html=True)
     b1, b2 = st.columns(2)
     with b1:
-        st.button(
-            "Add to cart",
-            key=f"{key_prefix}_add_{p['key']}",
-            icon=":material/add_shopping_cart:",
-            on_click=add,
-            args=(p["key"],),
-        )
+        st.button("Add to cart", key=f"{key_prefix}_add_{p['key']}", on_click=add, args=(p["key"],))
     with b2:
         st.link_button("Order now", p["pay_link"])
 
 
-def feature_box(icon_name: str, title: str, desc: str) -> None:
-    st.markdown(
-        f'<div class="feature-box"><div class="icon">{icon(icon_name, size="2rem", color="#f2d27b")}</div>'
-        f'<div class="ft">{title}</div><div class="fd">{desc}</div></div>',
-        unsafe_allow_html=True,
-    )
-
-
 def quote(text: str, who: str) -> None:
     st.markdown(
-        f'<div class="quote">{text}<div class="who">— {who}</div></div>',
+        f'<div class="quote">{text}<div class="who">{who}</div></div>',
         unsafe_allow_html=True,
     )
 
@@ -91,9 +78,9 @@ def render_footer() -> None:
     st.markdown(
         f"""
         <div class="footer">
-            <div>{icon('spa', size='1rem', color='#c9a24b')} <b>LUTHULISCENTS</b> — Golden Luxury Perfumes</div>
-            <div style="margin-top:8px;">{links}</div>
-            <div style="margin-top:10px;">© 2026 LuthuliScents · Hand-made with love in South Africa</div>
+            <div class="brand">LUTHULISCENTS</div>
+            <div class="links">{links}</div>
+            <div class="fine">Golden Luxury Perfumes &middot; Hand-made in South Africa &middot; © 2026</div>
         </div>
         """,
         unsafe_allow_html=True,

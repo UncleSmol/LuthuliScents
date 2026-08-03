@@ -7,8 +7,8 @@ from products import FAMILIES, PRODUCTS
 
 
 def render() -> None:
-    st.title(":material/storefront:  The Collection")
-    st.caption("Filter by scent family. Every bottle is R180 for 50ml.")
+    st.title("The Collection")
+    st.caption("Every bottle is R180 for 50ml. Filter by scent family.")
 
     fam_col, _, _ = st.columns([2, 1, 4])
     with fam_col:
@@ -22,6 +22,6 @@ def render() -> None:
             with col:
                 render_product(p, key_prefix="shop")
 
-    st.info(":material/local_fire_department:  Winter Sale: Get **free shipping** on all orders over R500!", icon=":material/local_fire_department:")
+    st.caption("Winter sale: free shipping on all orders over R500.")
 
     render_footer()

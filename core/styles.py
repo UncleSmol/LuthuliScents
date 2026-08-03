@@ -1,37 +1,243 @@
-"""Design system: global CSS injected once at app start."""
+"""Design system: global CSS injected once at app start.
+
+Minimal luxury aesthetic — ivory palette, serif display type, generous
+whitespace, restrained gold accents. No emojis, sparse iconography.
+"""
 
 import streamlit as st
 
 _FONT_IMPORT = """
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Poppins:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=block');
 """
 
 _CSS = """
 .stApp {
-    background:
-        radial-gradient(circle at 12% 8%, rgba(212,175,55,0.18), transparent 26%),
-        radial-gradient(circle at 88% 92%, rgba(139,69,19,0.22), transparent 32%),
-        linear-gradient(135deg, #120a06 0%, #23150c 45%, #462a15 100%);
-    color: #f7e7c6;
-    font-family: 'Poppins', sans-serif;
+    background: #FAF7F0;
+    color: #221E17;
+    font-family: 'Inter', sans-serif;
 }
 
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Playfair Display', serif;
-    color: #f2d27b !important;
-    letter-spacing: 0.5px;
+    color: #1F1B14 !important;
+    letter-spacing: .01em;
 }
+
+p, label, div { color: #221E17; }
+
+a { color: #221E17; }
 
 .block-container {
-    padding-top: 1.6rem;
-    padding-bottom: 3rem;
-    max-width: 1200px;
+    padding-top: 2.2rem;
+    padding-bottom: 4rem;
+    max-width: 1160px;
 }
 
-div[data-testid="stSidebar"] { background: #1a0f08; }
+div[data-testid="stSidebar"] { background: #F4F0E6; }
 
-/* ---------- Material Symbols icons ---------- */
+/* ---------- navigation ---------- */
+.nav-pills .nav-link {
+    color: #7A7263 !important;
+    font-size: .8rem !important;
+    letter-spacing: .1em !important;
+    text-transform: uppercase !important;
+    padding: 10px 14px !important;
+    border-radius: 0 !important;
+    border-bottom: 2px solid transparent;
+    transition: color .2s ease;
+}
+.nav-pills .nav-link:hover { color: #221E17 !important; background: transparent !important; }
+.nav-pills .nav-link.active {
+    color: #221E17 !important;
+    background: transparent !important;
+    border-bottom-color: #A98A4C;
+}
+
+/* ---------- buttons ---------- */
+.stButton > button, .stFormSubmitButton > button, .stLinkButton > a {
+    background: transparent !important;
+    color: #221E17 !important;
+    border: 1px solid #C9BEA6 !important;
+    border-radius: 2px !important;
+    font-size: .76rem !important;
+    letter-spacing: .16em !important;
+    text-transform: uppercase !important;
+    font-weight: 500 !important;
+    padding: .6rem 1.5rem !important;
+    box-shadow: none !important;
+    transition: background .2s ease, color .2s ease, border-color .2s ease !important;
+}
+.stButton > button:hover, .stFormSubmitButton > button:hover, .stLinkButton > a:hover {
+    background: #221E17 !important;
+    color: #FAF7F0 !important;
+    border-color: #221E17 !important;
+}
+.stButton > button[kind="primary"], .stFormSubmitButton > button[kind="primary"] {
+    background: #221E17 !important;
+    color: #FAF7F0 !important;
+    border-color: #221E17 !important;
+}
+.stButton > button[kind="primary"]:hover, .stFormSubmitButton > button[kind="primary"]:hover {
+    background: #A98A4C !important;
+    border-color: #A98A4C !important;
+    color: #FAF7F0 !important;
+}
+
+/* ---------- inputs ---------- */
+.stTextInput input, .stNumberInput input, .stTextArea textarea {
+    background: transparent !important;
+    color: #221E17 !important;
+    border: 1px solid #E3DBC8 !important;
+    border-radius: 2px !important;
+}
+.stTextInput input:focus, .stNumberInput input:focus, .stTextArea textarea:focus {
+    border-color: #A98A4C !important;
+    box-shadow: none !important;
+}
+.stSelectbox div[data-baseweb="select"] > div {
+    background: transparent;
+    border: 1px solid #E3DBC8;
+    border-radius: 2px;
+    color: #221E17;
+}
+
+/* ---------- containers ---------- */
+div[data-testid="stExpander"] {
+    border: 1px solid #E7E0D0;
+    border-radius: 8px;
+    background: #FFFFFF;
+}
+.stAlert, .stSuccess, .stWarning, .stInfo, .stError {
+    background: #FFFFFF;
+    border: 1px solid #E7E0D0;
+    border-radius: 6px;
+    color: #221E17;
+}
+
+img { border-radius: 8px; box-shadow: 0 8px 24px rgba(31,27,20,.08); }
+
+hr { border: none; border-top: 1px solid #E7E0D0; margin: 36px 0; }
+
+/* ---------- masthead ---------- */
+.masthead {
+    text-align: center;
+    padding: 60px 24px 44px;
+    margin: 0 0 40px;
+    border-bottom: 1px solid #E7E0D0;
+}
+.masthead .eyebrow {
+    font-size: .68rem;
+    letter-spacing: .36em;
+    text-transform: uppercase;
+    color: #A98A4C;
+    margin-bottom: 18px;
+}
+.masthead h1 { font-size: 2.6rem; margin: 0 0 16px; font-weight: 600; }
+.masthead p {
+    color: #7A7263;
+    font-size: 1rem;
+    max-width: 560px;
+    margin: 0 auto;
+    line-height: 1.8;
+    font-weight: 300;
+}
+
+/* ---------- section headings ---------- */
+.sec-head { margin: 52px 0 30px; text-align: center; }
+.sec-head .label {
+    font-size: .66rem;
+    letter-spacing: .34em;
+    text-transform: uppercase;
+    color: #A98A4C;
+    margin-bottom: 10px;
+}
+.sec-head h2 { font-size: 1.8rem; margin: 0; font-weight: 600; }
+
+/* ---------- statement ---------- */
+.statement {
+    margin: 56px auto 16px;
+    max-width: 720px;
+    text-align: center;
+    border-top: 1px solid #E7E0D0;
+    border-bottom: 1px solid #E7E0D0;
+    padding: 44px 24px;
+    color: #4A4438;
+    font-size: 1.02rem;
+    line-height: 2;
+    font-weight: 300;
+}
+.statement .mark { color: #A98A4C; }
+
+/* ---------- product cards ---------- */
+.p-card { text-align: center; }
+.p-card img {
+    width: 100%;
+    height: 320px;
+    object-fit: cover;
+    border-radius: 8px;
+    transition: transform .3s ease;
+}
+.p-card:hover img { transform: translateY(-4px); }
+.p-badge {
+    display: inline-block;
+    margin-top: 16px;
+    padding: 3px 12px;
+    border: 1px solid #D9C9A5;
+    border-radius: 999px;
+    color: #A98A4C;
+    font-size: .6rem;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+}
+.p-name { font-family: 'Playfair Display', serif; font-size: 1.15rem; color: #221E17; margin: 16px 0 2px; }
+.p-family { font-size: .66rem; letter-spacing: .24em; text-transform: uppercase; color: #A98A4C; }
+.p-notes { font-size: .8rem; color: #7A7263; margin: 10px 0; line-height: 1.6; }
+.p-price { font-size: 1.02rem; font-weight: 500; color: #221E17; margin: 12px 0; }
+
+/* ---------- quotes ---------- */
+.quote {
+    border-left: 1px solid #C9BEA6;
+    padding: 4px 0 4px 22px;
+    margin: 22px 0;
+    color: #4A4438;
+    font-size: .95rem;
+    font-style: italic;
+    line-height: 1.8;
+}
+.quote .who {
+    font-style: normal;
+    font-size: .72rem;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: #A98A4C;
+    margin-top: 10px;
+}
+
+/* ---------- footer ---------- */
+.footer {
+    margin-top: 56px;
+    padding: 36px 20px;
+    text-align: center;
+    border-top: 1px solid #E7E0D0;
+    color: #7A7263;
+    font-size: .8rem;
+    letter-spacing: .03em;
+}
+.footer .brand { font-family: 'Playfair Display', serif; font-size: 1rem; color: #221E17; letter-spacing: .1em; }
+.footer .links { margin: 16px 0; }
+.footer a {
+    color: #221E17;
+    text-decoration: none;
+    margin: 0 12px;
+    font-size: .72rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+}
+.footer a:hover { color: #A98A4C; }
+.footer .fine { color: #A39A87; font-size: .74rem; margin-top: 14px; }
+
+/* ---------- material symbols (sparingly) ---------- */
 .material-symbols-rounded {
     font-family: 'Material Symbols Rounded';
     font-weight: normal;
@@ -43,153 +249,7 @@ div[data-testid="stSidebar"] { background: #1a0f08; }
     vertical-align: middle;
     -webkit-font-smoothing: antialiased;
 }
-.ls-icon { margin-right: 4px; }
-
-/* ---------- nav ---------- */
-.nav-pills .nav-link {
-    color: #f7e7c6 !important;
-    border-radius: 999px !important;
-    margin: 0 4px;
-    font-weight: 500;
-    transition: all .2s ease;
-}
-.nav-pills .nav-link.active {
-    background: linear-gradient(135deg, #c9a24b, #f2d27b) !important;
-    color: #1a140f !important;
-}
-
-/* ---------- buttons ---------- */
-.stButton > button, .stFormSubmitButton > button {
-    background: linear-gradient(135deg, #3a2a1d, #5a3a21);
-    color: #f8ead2;
-    border: 1px solid #c9a24b;
-    border-radius: 999px;
-    font-weight: 500;
-    transition: all .2s ease;
-    box-shadow: 0 6px 16px rgba(0,0,0,.18);
-}
-.stButton > button:hover, .stFormSubmitButton > button:hover {
-    background: linear-gradient(135deg, #c9a24b, #f2d27b) !important;
-    color: #1a140f !important;
-    transform: translateY(-1px);
-}
-.stButton > button[kind="primary"] {
-    background: linear-gradient(135deg, #c9a24b, #f2d27b);
-    color: #1a140f;
-    border: none;
-}
-.stLinkButton > a {
-    background: linear-gradient(135deg, #3a2a1d, #5a3a21);
-    color: #f8ead2 !important;
-    border: 1px solid #c9a24b;
-    border-radius: 999px;
-    font-weight: 500;
-    transition: all .2s ease;
-    box-shadow: 0 6px 16px rgba(0,0,0,.18);
-}
-.stLinkButton > a:hover {
-    background: linear-gradient(135deg, #c9a24b, #f2d27b) !important;
-    color: #1a140f !important;
-    transform: translateY(-1px);
-}
-
-/* ---------- inputs ---------- */
-.stTextInput input, .stNumberInput input, .stSelectbox div[data-baseweb="select"] > div,
-.stTextArea textarea {
-    background: rgba(255,255,255,0.05) !important;
-    color: #f8ead2 !important;
-    border: 1px solid #c9a24b !important;
-    border-radius: 10px !important;
-}
-
-/* ---------- containers ---------- */
-div[data-testid="stExpander"] {
-    border: 1px solid rgba(212,175,55,.22);
-    border-radius: 16px;
-    background: rgba(255,255,255,.03);
-}
-.stAlert, .stSuccess, .stWarning, .stInfo, .stError { border-radius: 12px; }
-
-img { border-radius: 16px; box-shadow: 0 14px 34px rgba(0,0,0,.28); }
-
-/* ---------- hero ---------- */
-.hero {
-    text-align: center;
-    padding: 46px 30px 40px;
-    margin: 0 auto 26px;
-    border: 1px solid rgba(212,175,55,.3);
-    border-radius: 28px;
-    background: linear-gradient(135deg, rgba(255,255,255,.06), rgba(212,175,55,.13));
-    box-shadow: 0 18px 44px rgba(0,0,0,.3);
-    position: relative;
-    overflow: hidden;
-}
-.hero::before {
-    content: "";
-    position: absolute; top: -60%; left: -30%;
-    width: 60%; height: 260%;
-    background: linear-gradient(90deg, transparent, rgba(242,210,123,.14), transparent);
-    transform: rotate(20deg);
-    animation: sheen 7s linear infinite;
-}
-@keyframes sheen { 0% {left: -60%;} 100% {left: 130%;} }
-.hero .eyebrow {
-    display: inline-block; padding: 6px 16px; border-radius: 999px;
-    background: rgba(212,175,55,.16); color: #f2d27b;
-    font-size: .75rem; letter-spacing: .28em; text-transform: uppercase; margin-bottom: 12px;
-}
-.hero h1 { font-size: 2.8rem; margin: 0 0 10px; }
-.hero p { font-size: 1.08rem; color: #f6e8c9; max-width: 640px; margin: 0 auto; line-height: 1.7; }
-
-/* ---------- product cards ---------- */
-.p-card {
-    border: 1px solid rgba(212,175,55,.25);
-    border-radius: 20px;
-    padding: 16px;
-    text-align: center;
-    background: rgba(255,255,255,.045);
-    box-shadow: 0 12px 28px rgba(0,0,0,.22);
-    transition: transform .25s ease, box-shadow .25s ease;
-    height: 100%;
-}
-.p-card:hover { transform: translateY(-6px); box-shadow: 0 22px 44px rgba(0,0,0,.34); }
-.p-card img { width: 100%; height: 230px; object-fit: cover; border-radius: 14px; }
-.p-badge {
-    position: relative; top: 14px; z-index: 2; margin: -40px auto 0;
-    width: fit-content; padding: 3px 12px; border-radius: 999px;
-    background: linear-gradient(135deg, #c9a24b, #f2d27b); color: #1a140f;
-    font-size: .72rem; font-weight: 600; letter-spacing: .06em;
-}
-.p-name { font-family: 'Playfair Display', serif; font-size: 1.25rem; color: #f2d27b; margin: 8px 0 2px; }
-.p-family { font-size: .72rem; letter-spacing: .18em; text-transform: uppercase; color: #c9a24b; }
-.p-tag { font-size: .86rem; color: #f6e8c9; margin: 6px 0; line-height: 1.5; }
-.p-notes { font-size: .78rem; color: #d8c49a; margin: 4px 0; }
-.p-price { font-size: 1.35rem; font-weight: 600; color: #f2d27b; margin: 8px 0; }
-
-/* ---------- feature boxes ---------- */
-.feature-box {
-    border: 1px solid rgba(212,175,55,.22); border-radius: 18px; padding: 20px 16px;
-    background: rgba(255,255,255,.04); text-align: center; height: 100%;
-}
-.feature-box .icon { font-size: 2rem; color: #f2d27b; margin-bottom: 8px; }
-.feature-box .ft { font-family: 'Playfair Display', serif; font-size: 1.05rem; color: #f2d27b; margin: 6px 0 4px; }
-.feature-box .fd { font-size: .82rem; color: #e6d5ab; line-height: 1.55; }
-
-/* ---------- quotes ---------- */
-.quote {
-    border-left: 3px solid #c9a24b; padding: 10px 18px; margin: 10px 0;
-    background: rgba(255,255,255,.03); border-radius: 0 12px 12px 0;
-    color: #f6e8c9; font-style: italic;
-}
-.quote .who { font-style: normal; font-size: .8rem; color: #c9a24b; margin-top: 6px; }
-
-/* ---------- footer ---------- */
-.footer {
-    margin-top: 40px; padding: 26px 20px; text-align: center;
-    border-top: 1px solid rgba(212,175,55,.25);
-    color: #c9b688; font-size: .85rem;
-}
-.footer a { color: #f2d27b; text-decoration: none; margin: 0 8px; }
+.ls-icon { margin-right: 6px; }
 """
 
 

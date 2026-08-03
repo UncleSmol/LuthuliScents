@@ -4,10 +4,9 @@ import urllib.parse
 
 import streamlit as st
 
-from core.icons import st_icon
-from core.session import clear, decrement, increment, items, remove, subtotal
+from core.session import clear, decrement, increment, items, subtotal
 from core.shipping import apply_free_shipping, get_rates, parse_price
-from core.ui import render_footer, section_title
+from core.ui import render_footer, section_heading
 
 
 def _render_line_item(p: dict, qty: int) -> None:
@@ -15,23 +14,23 @@ def _render_line_item(p: dict, qty: int) -> None:
     with row_l:
         st.markdown(f"**{p['name']}**  \n{p['family']} · {p['size']}")
     with row_m:
-        mc1, _, _, mc4 = st.columns([1, 1, 1, 1])
+        mc1, mc2, mc3, mc4 = st.columns([1, 1, 1, 1])
         with mc1:
-            st.button(":material/remove:", key=f"dec_{p['key']}", on_click=decrement, args=(p["key"],))
+            st.button("−", key=f"dec_{p['key']}", on_click=decrement, args=(p["key"],))
+        with mc3:
+            st.write(f"**×{qty}**")
         with mc4:
-            st.button(":material/add:", key=f"inc_{p['key']}", on_click=increment, args=(p["key"],))
-        st.write(f"**×{qty}**")
+            st.button("+", key=f"inc_{p['key']}", on_click=increment, args=(p["key"],))
     with row_r:
         st.write(f"**R{p['price'] * qty:.2f}**")
-    st.markdown("---")
+    st.markdown("<hr>", unsafe_allow_html=True)
 
 
 def render() -> None:
-    st.title(":material/shopping_cart:  Your Cart")
+    st.title("Your Cart")
 
     if not st.session_state.cart:
-        st_icon("shopping_cart", size="4rem", color="#c9a24b")
-        st.write("Your cart is empty — head to the **Shop** page to add your signature scent.")
+        st.write("Your cart is empty. Visit the Shop page to add your signature scent.")
         st.stop()
 
     cart_items = items()
@@ -44,11 +43,11 @@ def render() -> None:
     with col2:
         st.metric("Subtotal", f"R{total_product:.2f}")
     with col3:
-        if st.button("Clear cart", icon=":material/delete:"):
+        if st.button("Clear cart"):
             clear()
 
-    st.markdown("---")
-    section_title("local_shipping", "Delivery & checkout")
+    st.markdown("<hr>", unsafe_allow_html=True)
+    section_heading("Delivery", "Checkout")
     st.caption("Enter your details to calculate shipping to your door.")
 
     with st.form("checkout_form"):
@@ -68,7 +67,7 @@ def render() -> None:
             delivery_postal_code = st.text_input("Postal code")
             delivery_city = st.text_input("Delivery city", value="Johannesburg")
 
-        submit_checkout = st.form_submit_button("Calculate shipping & checkout", type="primary")
+        submit_checkout = st.form_submit_button("Calculate shipping", type="primary")
 
     if submit_checkout:
         _handle_checkout(
@@ -123,7 +122,7 @@ def _handle_checkout(**kwargs) -> None:
         for p, qty in cart_items:
             st.write(f"- {p['name']} × {qty} — R{p['price'] * qty:.2f}")
         st.write(f"**Subtotal:** R{total_product:.2f}")
-        free_note = " *(free — over R500!)*" if total_product > 500 else ""
+        free_note = " *(free — over R500)*" if total_product > 500 else ""
         st.write(f"**Shipping:** R{shipping_cost:.2f}{free_note}")
         st.write(f"**Total to pay:** R{total_amount:.2f}")
 
@@ -134,8 +133,8 @@ def _handle_checkout(**kwargs) -> None:
             f"&description={urllib.parse.quote(description)}"
         )
         st.markdown("#### Complete payment")
-        st.markdown(f"[👉 Pay R{total_amount:.2f} securely via Yoco]({checkout_url})")
-        st.info("After payment your order will be prepared and shipped within 2 business days.")
+        st.markdown(f"[Pay R{total_amount:.2f} securely via Yoco]({checkout_url})")
+        st.info("After payment, your order will be prepared and shipped within 2 business days.")
     elif result.get("pending"):
         st.warning("Rate requests are still pending from providers — try again in a moment.")
     else:

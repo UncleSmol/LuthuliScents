@@ -1,11 +1,11 @@
-"""Contact page: WhatsApp enquiry form, FAQs and direct contacts."""
+"""Contact page: enquiry form, FAQs and direct contacts."""
 
 import urllib.parse
 
 import streamlit as st
 
 from core.icons import icon
-from core.ui import render_footer, section_title
+from core.ui import render_footer, section_heading
 
 WHATSAPP_NUMBER = "27692380796"
 CONTACT_EMAIL = "sthandiweluthuli322@gmail.com"
@@ -31,13 +31,10 @@ def _wa_link(name: str, subject: str, message: str, email: str, phone: str) -> s
 
 
 def render() -> None:
-    st.title(":material/mail:  Contact us")
-
+    st.title("Contact")
     st.markdown(
-        """
-        We'd love to hear from you! Whether it's a question about a scent, a bulk
-        order, or a custom fragrance idea — send us a message below.
-        """
+        "Questions about a scent, a bulk order or a custom fragrance idea — "
+        "send us a message and we will get back to you."
     )
 
     c1, c2 = st.columns(2)
@@ -49,15 +46,15 @@ def render() -> None:
     with c2:
         message = st.text_area("Message", height=190)
 
-    if st.button("Send via WhatsApp", type="primary", icon=":material/send:"):
+    if st.button("Send via WhatsApp", type="primary"):
         if not name.strip() or not message.strip():
             st.warning("Please add your name and a message.")
         else:
-            st.success("Your message is ready — tap below to send it on WhatsApp.")
+            st.success("Your message is ready to send.")
             st.link_button("Open WhatsApp", _wa_link(name, subject, message, email, phone))
 
     st.markdown("---")
-    section_title("help", "Frequently asked questions")
+    section_heading("Support", "Frequently asked questions")
     faqs = [
         ("How long does delivery take?", "Orders ship within 2 business days. Delivery typically takes 2–5 business days depending on your location."),
         ("Do your perfumes suit both men and women?", "Yes — we make female, male and unisex scents. Many of our favourites are unisex."),
@@ -69,11 +66,13 @@ def render() -> None:
             st.write(a)
 
     st.markdown("---")
-    section_title("call", "Direct contacts")
+    section_heading("Reach us", "Direct contacts")
     st.markdown(
         f"""
-        <p>{icon('mail', size='1.1rem', color='#f2d27b')} <a href="mailto:{CONTACT_EMAIL}" style="color:#f2d27b;">{CONTACT_EMAIL}</a></p>
-        <p>{icon('chat', size='1.1rem', color='#f2d27b')} <a href="https://wa.me/{WHATSAPP_NUMBER}" style="color:#f2d27b;">+27 69 238 0796</a></p>
+        <p style="margin:8px 0;">{icon('mail', size='1.05rem', color='#A98A4C')}
+        <a href="mailto:{CONTACT_EMAIL}" style="color:#221E17;">{CONTACT_EMAIL}</a></p>
+        <p style="margin:8px 0;">{icon('chat', size='1.05rem', color='#A98A4C')}
+        <a href="https://wa.me/{WHATSAPP_NUMBER}" style="color:#221E17;">+27 69 238 0796</a></p>
         """,
         unsafe_allow_html=True,
     )
