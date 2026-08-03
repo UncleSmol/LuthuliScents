@@ -6,13 +6,19 @@ import streamlit as st
 
 from core.session import clear, decrement, increment, items, subtotal
 from core.shipping import apply_free_shipping, get_rates, parse_price
-from core.ui import render_footer, section_heading
+from core.ui import img_b64, render_footer, section_heading
 
 
 def _render_line_item(p: dict, qty: int) -> None:
-    row_l, row_m, row_r = st.columns([1.4, 1, 1])
+    row_l, row_m, row_r = st.columns([2, 1, 1])
     with row_l:
-        st.markdown(f"**{p['name']}**  \n{p['family']} · {p['size']}")
+        st.markdown(
+            f'<div class="cart-item">'
+            f'<img src="data:image/jpeg;base64,{img_b64(p["image"])}" alt="{p["name"]}">'
+            f'<div class="cart-info"><div class="cart-name">{p["name"]}</div>'
+            f'<div class="cart-meta">{p["family"]} &middot; {p["size"]}</div></div></div>',
+            unsafe_allow_html=True,
+        )
     with row_m:
         mc1, mc2, mc3, mc4 = st.columns([1, 1, 1, 1])
         with mc1:
@@ -43,8 +49,7 @@ def render() -> None:
     with col2:
         st.metric("Subtotal", f"R{total_product:.2f}")
     with col3:
-        if st.button("Clear cart"):
-            clear()
+        st.button("Clear cart", on_click=clear)
 
     st.markdown("<hr>", unsafe_allow_html=True)
     section_heading("Delivery", "Checkout")
@@ -139,3 +144,4 @@ def _handle_checkout(**kwargs) -> None:
         st.warning("Rate requests are still pending from providers — try again in a moment.")
     else:
         st.warning("No shipping options available for this postal code in sandbox mode.")
+

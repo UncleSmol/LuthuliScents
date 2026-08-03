@@ -218,6 +218,25 @@ hr { border: none; border-top: 1px solid #E7E0D0; margin: 36px 0; }
     margin-top: 10px;
 }
 
+/* ---------- cart line items ---------- */
+.cart-item { display: flex; align-items: center; gap: 14px; }
+.cart-item img {
+    width: 72px;
+    height: 72px;
+    object-fit: cover;
+    border-radius: 6px;
+    box-shadow: 0 4px 12px rgba(31, 27, 20, .1);
+    flex: none;
+}
+.cart-name { font-family: 'Playfair Display', serif; font-size: 1.05rem; color: #221E17; }
+.cart-meta {
+    font-size: .66rem;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: #A98A4C;
+    margin-top: 4px;
+}
+
 /* ---------- footer ---------- */
 .footer {
     margin-top: 56px;
