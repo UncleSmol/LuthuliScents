@@ -25,9 +25,5 @@ jobs:
       - name: Install Railway CLI
         run: npm install -g @railway/cli
 
-      - name: Set Railway Variables
-        run: |
-          railway variables set BOBGO_API_KEY="${{ secrets.BOBGO_API_KEY }}"
-
       - name: Deploy
         run: railway up --detach
