@@ -1,13 +1,16 @@
 import streamlit as st
 
-st.markdown('''
+cart_count = len(st.session_state.get("cart", []))
+nav_html = f'''
 <div style="display:flex; justify-content:center; gap:10px; margin:12px 0;">
   <a href="/" style="color:#f8ead2; text-decoration:none; padding:8px 12px; border-radius:999px; background:rgba(20,12,7,0.3);">Home</a>
   <a href="/?script=/pages/02_About.py" style="color:#f8ead2; text-decoration:none; padding:8px 12px; border-radius:999px; background:rgba(20,12,7,0.7);">About</a>
   <a href="/?script=/pages/03_Products.py" style="color:#f8ead2; text-decoration:none; padding:8px 12px; border-radius:999px; background:rgba(20,12,7,0.3);">Products</a>
   <a href="/?script=/pages/04_Contact.py" style="color:#f8ead2; text-decoration:none; padding:8px 12px; border-radius:999px; background:rgba(20,12,7,0.3);">Contact</a>
+  <a href="/?script=/pages/05_Cart.py" style="color:#f8ead2; text-decoration:none; padding:8px 12px; border-radius:999px; background:rgba(212,175,55,0.12);">Cart ({cart_count})</a>
 </div>
-''', unsafe_allow_html=True)
+'''
+st.markdown(nav_html, unsafe_allow_html=True)
 
 st.title("About LuthuliScents")
 st.subheader("Welcome to LUTHULISCENTS 🧴")
