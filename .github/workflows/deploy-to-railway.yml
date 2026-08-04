@@ -1,46 +1,33 @@
 name: Deploy to Railway
 
 on:
-  workflow_dispatch:
   push:
-    branches: [ main ]
+    branches:
+      - main
+  workflow_dispatch:
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
+
+    env:
+      RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Install Node (for Railway CLI)
+      - name: Install Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: 20
 
       - name: Install Railway CLI
         run: npm install -g @railway/cli
 
-      - name: Login to Railway
-        env:
-          RAILWAY_API_KEY: ${{ secrets.RAILWAY_API_KEY }}
+      - name: Set Railway Variables
         run: |
-          echo "$RAILWAY_API_KEY" | railway login --apiKey - || true
+          railway variables set BOBGO_API_KEY="${{ secrets.BOBGO_API_KEY }}"
 
-      - name: Set BOBGO_API_KEY in Railway
-        env:
-          RAILWAY_API_KEY: ${{ secrets.RAILWAY_API_KEY }}
-          BOBGO_API_KEY: ${{ secrets.BOBGO_API_KEY }}
-          RAILWAY_PROJECT_ID: ${{ secrets.RAILWAY_PROJECT_ID }}
-        run: |
-          # Ensure railway is authenticated
-          echo "$RAILWAY_API_KEY" | railway login --apiKey - || true
-          # Set the environment variable for the project
-          railway variables set BOBGO_API_KEY "$BOBGO_API_KEY" --project "$RAILWAY_PROJECT_ID"
-
-      - name: Deploy to Railway
-        env:
-          RAILWAY_API_KEY: ${{ secrets.RAILWAY_API_KEY }}
-          RAILWAY_PROJECT_ID: ${{ secrets.RAILWAY_PROJECT_ID }}
-        run: |
-          echo "$RAILWAY_API_KEY" | railway login --apiKey - || true
-          railway up --project "$RAILWAY_PROJECT_ID" --yes || true
+      - name: Deploy
+        run: railway up --detach
