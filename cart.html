@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cart &amp; Checkout — LuthuliScents</title>
+    <meta name="description" content="Review your LuthuliScents cart, calculate flat-rate shipping and pay securely via Yoco." />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body data-active="cart"
+        data-hero-eyebrow="Checkout"
+        data-hero-title="Your Cart"
+        data-hero-subtitle="Review your scents, calculate shipping and pay securely via Yoco."
+        data-hero-side="left">
+    <div id="site-header"></div>
+    <div id="site-hero"></div>
+
+    <main class="container page">
+
+      <section>
+        <div id="cart-lines"></div>
+        <div class="summary-row total" style="max-width:520px;">
+          <span>Subtotal</span><span id="cart-subtotal">R0.00</span>
+        </div>
+        <button class="btn ghost" id="clear-cart" style="margin-top:12px;">Clear cart</button>
+      </section>
+
+      <hr />
+
+      <section id="checkout">
+        <div class="sec-head" style="margin-top:0;">
+          <div class="label">Delivery</div>
+          <h2>Checkout</h2>
+        </div>
+        <p class="caption" style="text-align:center; margin-bottom:24px;">Enter your details to calculate shipping to your door. Free shipping on all orders over R500.</p>
+
+        <form id="checkout-form" class="form-grid" style="max-width:760px; margin:0 auto;">
+          <div>
+            <label for="checkout-name">Full name</label>
+            <input id="checkout-name" name="name" type="text" />
+          </div>
+          <div>
+            <label for="checkout-email">Email address</label>
+            <input id="checkout-email" name="email" type="email" />
+          </div>
+          <div>
+            <label for="checkout-phone">Phone number</label>
+            <input id="checkout-phone" name="phone" type="tel" />
+          </div>
+          <div>
+            <label for="checkout-city">City</label>
+            <input id="checkout-city" name="city" type="text" value="Johannesburg" />
+          </div>
+          <div>
+            <label for="checkout-address">Street address</label>
+            <input id="checkout-address" name="address" type="text" />
+          </div>
+          <div>
+            <label for="checkout-suburb">Suburb</label>
+            <input id="checkout-suburb" name="suburb" type="text" />
+          </div>
+          <div>
+            <label for="checkout-postal">Postal code</label>
+            <input id="checkout-postal" name="postal" type="text" />
+          </div>
+          <div>
+            <label for="checkout-delivery-city">Delivery city</label>
+            <input id="checkout-delivery-city" name="delivery_city" type="text" value="Johannesburg" />
+          </div>
+          <div class="full">
+            <button class="btn primary" type="submit">Calculate shipping &amp; checkout</button>
+          </div>
+        </form>
+
+        <div id="checkout-notice"></div>
+        <div id="checkout-summary" style="max-width:620px; margin:28px auto 0;"></div>
+      </section>
+    </main>
+
+    <div id="site-footer"></div>
+
+    <script src="js/data.js"></script>
+    <script src="js/site.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/checkout.js"></script>
+  </body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact — LuthuliScents</title>
+    <meta name="description" content="Contact LuthuliScents for questions, bulk or wholesale orders, custom fragrances and order support." />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body data-active="contact"
+        data-hero-eyebrow="Contact"
+        data-hero-title="Get in touch"
+        data-hero-subtitle="Questions about a scent, a bulk order or a custom fragrance idea — send us a message and we will get back to you."
+        data-hero-side="right">
+    <div id="site-header"></div>
+    <div id="site-hero"></div>
+
+    <main class="container page">
+
+      <section class="grid" style="grid-template-columns: 1fr 1fr; gap: 40px;">
+        <div>
+          <h2>Send an enquiry</h2>
+          <form id="contact-form" class="form-grid">
+            <div>
+              <label for="contact-name">Your name</label>
+              <input id="contact-name" name="name" type="text" />
+            </div>
+            <div>
+              <label for="contact-email">Your email</label>
+              <input id="contact-email" name="email" type="email" />
+            </div>
+            <div>
+              <label for="contact-phone">Phone number (optional)</label>
+              <input id="contact-phone" name="phone" type="tel" />
+            </div>
+            <div>
+              <label for="contact-subject">Subject</label>
+              <select id="contact-subject" name="subject">
+                <option>General question</option>
+                <option>Bulk / wholesale order</option>
+                <option>Custom fragrance</option>
+                <option>Order support</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div class="full">
+              <label for="contact-message">Message</label>
+              <textarea id="contact-message" name="message" rows="6"></textarea>
+            </div>
+            <div class="full">
+              <button class="btn primary" type="submit">Send via WhatsApp</button>
+            </div>
+          </form>
+          <div id="contact-result"></div>
+        </div>
+
+        <div>
+          <h2>Reach us directly</h2>
+          <div class="contact-links">
+            <a href="mailto:sthandiweluthuli322@gmail.com">
+              <span><span class="material-symbols-rounded ls-icon">mail</span>sthandiweluthuli322@gmail.com</span>
+              <span class="caption">Email us</span>
+            </a>
+            <a href="https://wa.me/27692380796" target="_blank" rel="noopener">
+              <span><span class="material-symbols-rounded ls-icon">chat</span>+27 69 238 0796</span>
+              <span class="caption">WhatsApp</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="sec-head">
+        <div class="label">Support</div>
+        <h2>Frequently asked questions</h2>
+      </section>
+      <details class="faq">
+        <summary>How long does delivery take?</summary>
+        <p>Orders ship within 2 business days. Delivery typically takes 2&ndash;5 business days depending on your location.</p>
+      </details>
+      <details class="faq">
+        <summary>Do your perfumes suit both men and women?</summary>
+        <p>Yes — we make female, male and unisex scents. Many of our favourites are unisex.</p>
+      </details>
+      <details class="faq">
+        <summary>Are your perfumes made from scratch?</summary>
+        <p>Absolutely. Every batch is hand-blended and matured in our studio.</p>
+      </details>
+      <details class="faq">
+        <summary>Do you offer discounts for bulk orders?</summary>
+        <p>Yes! For weddings, gifting or wholesale, contact us directly for a custom quote.</p>
+      </details>
+    </main>
+
+    <div id="site-footer"></div>
+
+    <script src="js/data.js"></script>
+    <script src="js/site.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/contact.js"></script>
+  </body>
+</html>
