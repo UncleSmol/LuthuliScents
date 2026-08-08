@@ -1,5 +1,4 @@
-python-dotenv>=1.0.0
-streamlit>=1.26.0
+# Python tooling only (local). The site itself is a static site on GitHub Pages.
+# Used by build.py to generate catalog data and process order exports.
 requests>=2.31.0
-
-
+python-dotenv>=1.0.0

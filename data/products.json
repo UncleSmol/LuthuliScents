@@ -1,0 +1,118 @@
+{
+  "products": [
+    {
+      "key": "rosie",
+      "name": "Rosie",
+      "family": "Female",
+      "price": 180.0,
+      "size": "50ml",
+      "image": "img/WhatsApp Image 2026-05-27 at 09.07.42.jpeg",
+      "tagline": "Long-lasting, blooming florals",
+      "notes": "Peony, rose water, soft musk",
+      "occasions": "Date night · Weddings · Evenings",
+      "featured": true,
+      "badge": "Bestseller"
+    },
+    {
+      "key": "sweetapple",
+      "name": "Sweetapple",
+      "family": "Unisex",
+      "price": 180.0,
+      "size": "50ml",
+      "image": "img/WhatsApp Image 2026-05-27 at 09.05.30.jpeg",
+      "tagline": "Crisp, juicy and long-lasting",
+      "notes": "Red apple, fresh green accord, vanilla",
+      "occasions": "Day wear · Office · Casual",
+      "featured": true,
+      "badge": "Winter Sale"
+    },
+    {
+      "key": "apple-blaze",
+      "name": "Apple Blaze",
+      "family": "Unisex",
+      "price": 180.0,
+      "size": "50ml",
+      "image": "img/apple blaze.jpeg",
+      "tagline": "A fiery caramelised apple accord",
+      "notes": "Baked apple, warm amber, caramel",
+      "occasions": "Cooler days · Evenings · Winter",
+      "featured": false,
+      "badge": "Limited"
+    },
+    {
+      "key": "woody",
+      "name": "Woody",
+      "family": "Male",
+      "price": 180.0,
+      "size": "50ml",
+      "image": "img/woody2.png",
+      "tagline": "Bold, masculine, grounded",
+      "notes": "Cedarwood, sandalwood, smoky vetiver",
+      "occasions": "Business · Evenings · All season",
+      "featured": false,
+      "badge": "New"
+    },
+    {
+      "key": "noir-velvet",
+      "name": "Noir Velvet",
+      "family": "Female",
+      "price": 180.0,
+      "size": "50ml",
+      "image": "img/IMG-20260429-WA0066.jpg",
+      "tagline": "Mysterious and sensual",
+      "notes": "Blackberry, dark plum, amber musk",
+      "occasions": "Evenings · Gala · Signature",
+      "featured": false,
+      "badge": "Evening"
+    },
+    {
+      "key": "sweetapple-rose",
+      "name": "Sweet Apple Rose",
+      "family": "Unisex",
+      "price": 180.0,
+      "size": "50ml",
+      "image": "img/sweetapple.jpeg",
+      "tagline": "Rosy apple, fresh and fun",
+      "notes": "Ripe apple, rose petals, sugar",
+      "occasions": "Day wear · Brunch · Gift",
+      "featured": false,
+      "badge": "Gift Idea"
+    },
+    {
+      "key": "signature-gold",
+      "name": "Signature Gold",
+      "family": "Unisex",
+      "price": 180.0,
+      "size": "50ml",
+      "image": "img/WhatsApp Image 2026-05-11 at 14.58.30.jpeg",
+      "tagline": "The house signature — timeless luxury",
+      "notes": "Golden amber, white florals, oud",
+      "occasions": "Any occasion · Signature scent",
+      "featured": true,
+      "badge": "Signature"
+    }
+  ],
+  "families": [
+    "All",
+    "Female",
+    "Male",
+    "Unisex"
+  ],
+  "social_links": {
+    "TikTok": "https://www.tiktok.com/@sthandiwe386?is_from_webapp=1&sender_device=pc",
+    "Instagram": "https://www.instagram.com/luthuliscents?igsh=NzJvNDNxbDJsY3Jv",
+    "WhatsApp": "https://wa.me/27692380796",
+    "X / Twitter": "https://x.com/L68220Luthuli",
+    "Email": "mailto:sthandiweluthuli322@gmail.com",
+    "Facebook": "https://www.facebook.com/profile.php?id=61583709642144"
+  },
+  "shipping": {
+    "flat": 120.0,
+    "flat_metro": 85.0,
+    "metro_prefixes": [
+      "2"
+    ],
+    "free_shipping_threshold": 500.0
+  },
+  "yoco_checkout_link": "https://<project>.vercel.app/api/create-checkout"
+}

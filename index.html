@@ -1,331 +1,78 @@
-i<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>LuthuliScents</title>
-    <style>
-      :root {
-        --bg: #140c07;
-        --bg-soft: rgba(255, 255, 255, 0.05);
-        --text: #f8ead2;
-        --accent: #f2d27b;
-        --accent-2: #c9a24b;
-        --border: rgba(212, 175, 55, 0.28);
-      }
-
-      * { box-sizing: border-box; }
-      body {
-        margin: 0;
-        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-        color: var(--text);
-        background:
-          radial-gradient(circle at top left, rgba(212, 175, 55, 0.16), transparent 24%),
-          radial-gradient(circle at bottom right, rgba(139, 69, 19, 0.2), transparent 28%),
-          linear-gradient(135deg, #140c07 0%, #23150c 45%, #4a2b16 100%);
-        min-height: 100vh;
-      }
-
-      .page {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 24px;
-      }
-
-      .topbar {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: 16px;
-        padding: 16px 20px;
-        border: 1px solid var(--border);
-        border-radius: 20px;
-        background: rgba(255, 255, 255, 0.06);
-        backdrop-filter: blur(8px);
-        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.24);
-      }
-
-      .brand {
-        font-size: 1.3rem;
-        font-weight: 700;
-        color: var(--accent);
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-      }
-
-      .nav { display: flex; flex-wrap: wrap; gap: 10px; }
-      .nav button {
-        border: 1px solid var(--border);
-        background: linear-gradient(135deg, #3a2a1d 0%, #5a3a21 100%);
-        color: var(--text);
-        padding: 10px 14px;
-        border-radius: 10px;
-        cursor: pointer;
-        font-size: 0.95rem;
-      }
-      .nav button.active,
-      .nav button:hover {
-        background: linear-gradient(135deg, var(--accent-2) 0%, var(--accent) 100%);
-        color: #1a140f;
-      }
-
-      .section {
-        display: none;
-        padding: 28px 0 16px;
-      }
-      .section.active { display: block; }
-
-      .card {
-        border: 1px solid var(--border);
-        border-radius: 24px;
-        background: linear-gradient(135deg, rgba(255,255,255,0.08), rgba(212,175,55,0.12));
-        padding: 24px;
-        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.24);
-      }
-
-      .hero {
-        text-align: center;
-        padding: 28px 24px 20px;
-        margin-bottom: 20px;
-      }
-
-      .pill {
-        display: inline-block;
-        padding: 6px 12px;
-        border-radius: 999px;
-        background: rgba(212, 175, 55, 0.16);
-        color: var(--accent);
-        font-size: 0.8rem;
-        letter-spacing: 0.2em;
-        text-transform: uppercase;
-        margin-bottom: 10px;
-      }
-
-      h1, h2, h3 { color: var(--accent); }
-      p { line-height: 1.6; }
-
-      .grid { display: grid; gap: 20px; }
-      .products-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .product-card img { width: 100%; max-width: 240px; border-radius: 16px; display: block; margin: 0 auto 10px; }
-      .product-card .price { font-weight: 700; color: var(--accent); }
-      .btn {
-        border: none;
-        border-radius: 10px;
-        padding: 10px 14px;
-        cursor: pointer;
-        font-weight: 600;
-        background: linear-gradient(135deg, #3a2a1d 0%, #5a3a21 100%);
-        color: var(--text);
-      }
-      .btn:hover { background: linear-gradient(135deg, var(--accent-2) 0%, var(--accent) 100%); color: #1a140f; }
-
-      .cart-list { margin-top: 12px; }
-      .cart-item {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: 12px;
-        padding: 10px 0;
-        border-bottom: 1px solid rgba(255,255,255,0.1);
-      }
-      .contact-links { display: flex; flex-wrap: wrap; gap: 12px; }
-      .contact-links a {
-        color: var(--text);
-        text-decoration: none;
-        padding: 10px 12px;
-        border-radius: 10px;
-        background: rgba(255,255,255,0.06);
-        border: 1px solid var(--border);
-      }
-      .contact-links a:hover { background: rgba(212,175,55,0.16); }
-
-      .summary { margin-top: 16px; display: grid; gap: 10px; }
-      .form-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 12px; }
-      input, textarea { width: 100%; padding: 10px 12px; border-radius: 10px; border: 1px solid var(--border); background: rgba(255,255,255,0.08); color: var(--text); }
-      label { display: block; margin-bottom: 6px; font-size: 0.95rem; }
-
-      @media (max-width: 800px) {
-        .products-grid, .form-grid { grid-template-columns: 1fr; }
-        .topbar { flex-direction: column; align-items: flex-start; }
-      }
-    </style>
+    <title>LuthuliScents — Golden Luxury Perfumes</title>
+    <meta name="description" content="Hand-crafted artisan perfumes made from scratch in South Africa. Female, male and unisex scents that smell expensive without the markup." />
+    <link rel="stylesheet" href="css/style.css" />
   </head>
-  <body>
-    <div class="page">
-      <header class="topbar">
-        <div class="brand">LuthuliScents</div>
-        <nav class="nav">
-          <button class="active" data-target="home">🏠 Home</button>
-          <button data-target="about">ℹ️ About</button>
-          <button data-target="products">🧴 Products</button>
-          <button data-target="contact">📞 Contact</button>
-        </nav>
-      </header>
+  <body data-active="home"
+        data-hero-eyebrow="Luxury Fragrance House"
+        data-hero-title="Golden Luxury Perfumes"
+        data-hero-subtitle="Hand-crafted artisan scents, blended from scratch and made to last. Luxury quality, without the luxury markup."
+        data-hero-side="left"
+        data-hero-cta-label="Shop the collection"
+        data-hero-cta-href="products.html"
+        data-hero-cta2-label="View cart"
+        data-hero-cta2-href="cart.html">
+    <div id="site-header"></div>
+    <div id="site-hero"></div>
 
-      <main>
-        <section id="home" class="section active">
-          <div class="card hero">
-            <div class="pill">Luxury fragrance house</div>
-            <h1>✨ GOLDEN LUXURY PERFUMES</h1>
-            <p>Experience our hand-crafted, artisan scents designed to feel timeless, bold, and unforgettable.</p>
-          </div>
-          <div class="card">
-            <h2>✨ LUTHULISCENTS</h2>
-            <p>Discover your signature scent with perfumes that feel elegant, bold, and memorable.</p>
-            <img src="logo.jpeg" alt="LuthuliScents logo" style="max-width: 220px; border-radius: 16px; margin-top: 10px;" />
-          </div>
-        </section>
+    <main class="container page">
+      <div class="statement"><span class="mark">The house standard</span> Made from scratch, blended by hand and matured slowly — every bottle is crafted to smell far more expensive than it is.</div>
 
-        <section id="about" class="section">
-          <div class="card">
-            <h2>About LuthuliScents</h2>
-            <p>We create perfumes from scratch and blend timeless notes that feel elegant, bold, and memorable.</p>
-            <ul>
-              <li>We make our perfumes from scratch.</li>
-              <li>These scents are inspired by a mix of rich, modern fragrance notes.</li>
-              <li>Our perfumes suit all genders as long as you love beautiful scents.</li>
-              <li>We offer male, female, and unisex fragrances.</li>
-              <li>You can wear them for daily use, special occasions, or whenever you want to stand out.</li>
-            </ul>
-          </div>
-        </section>
+      <section class="sec-head">
+        <div class="label">The Collection</div>
+        <h2>Featured scents</h2>
+      </section>
+      <div class="grid grid-3" id="featured-grid"></div>
 
-        <section id="products" class="section">
-          <div class="card">
-            <h2>Our Products</h2>
-            <p>ℹ️ Winter Sale: Get free shipping on all orders over R500!</p>
-            <div class="grid products-grid">
-              <div class="product-card">
-                <img src="WhatsApp Image 2026-05-27 at 09.07.42.jpeg" alt="Rosie perfume" />
-                <h3>Rosie</h3>
-                <p>Longlasting feminine fragrance</p>
-                <p class="price">R180.00 - 50ml</p>
-                <button class="btn add-to-cart" data-name="Rosie" data-price="180">Add Rosie to cart</button>
-              </div>
-              <div class="product-card">
-                <img src="WhatsApp Image 2026-05-27 at 09.05.30.jpeg" alt="Sweetapple perfume" />
-                <h3>Sweetapple</h3>
-                <p>Long lasting unisex fragrance</p>
-                <p class="price">R180.00 - 50ml</p>
-                <button class="btn add-to-cart" data-name="Sweetapple" data-price="180">Add Sweetapple to cart</button>
-              </div>
-            </div>
+      <section class="sec-head">
+        <div class="label">From our clients</div>
+        <h2>Notes &amp; words</h2>
+      </section>
+      <div class="quote">My Rosie carried me through an entire wedding day — one spray in the morning was enough.<div class="who">Thandeka M., Johannesburg</div></div>
+      <div class="quote">A classy scent that easily passes for something three times the price.<div class="who">Bongani K., Durban</div></div>
 
-            <div class="summary">
-              <h3>🛒 Your cart</h3>
-              <div id="cart-items" class="cart-list">Your cart is empty.</div>
-              <p id="cart-total">Cart total: R0.00</p>
-            </div>
+      <hr />
 
-            <div class="summary">
-              <h3>🚚 Shipping estimate</h3>
-              <form id="shipping-form">
-                <div class="form-grid">
-                  <div>
-                    <label for="name">Full name</label>
-                    <input id="name" name="name" placeholder="Full name" />
-                  </div>
-                  <div>
-                    <label for="email">Email address</label>
-                    <input id="email" name="email" placeholder="Email address" />
-                  </div>
-                  <div>
-                    <label for="address">Delivery address</label>
-                    <input id="address" name="address" placeholder="456 Delivery Road" />
-                  </div>
-                  <div>
-                    <label for="postal">Postal code</label>
-                    <input id="postal" name="postal" placeholder="2001" />
-                  </div>
-                </div>
-                <br />
-                <button class="btn" type="submit">Check estimate</button>
-              </form>
-              <div id="shipping-output" style="margin-top: 12px;"></div>
-            </div>
-          </div>
-        </section>
+      <section class="sec-head">
+        <div class="label">Stay in touch</div>
+        <h2>Join the VIP list</h2>
+      </section>
+      <p class="caption" style="text-align:center;">Early access to new drops, restocks and private sales.</p>
+      <form id="newsletter-form" style="max-width:480px; margin:0 auto; display:flex; gap:12px; flex-wrap:wrap;">
+        <input id="newsletter-email" name="email" type="email" placeholder="you@example.com" style="flex:1; min-width:220px;" required />
+        <button class="btn primary" type="submit">Subscribe</button>
+      </form>
+      <p id="newsletter-result" style="text-align:center;"></p>
+    </main>
 
-        <section id="contact" class="section">
-          <div class="card">
-            <h2>Contact Us</h2>
-            <p>We make long-lasting scents that feel luxurious without being overly expensive.</p>
-            <div class="contact-links">
-              <a href="https://www.tiktok.com/@sthandiwe386?is_from_webapp=1&sender_device=pc" target="_blank">TikTok</a>
-              <a href="https://www.instagram.com/luthuliscents?igsh=NzJvNDNxbDJsY3Jv" target="_blank">Instagram</a>
-              <a href="https://wa.me/27692380796" target="_blank">WhatsApp</a>
-              <a href="https://x.com/L68220Luthuli" target="_blank">X / Twitter</a>
-              <a href="mailto:sthandiweluthuli322@gmail.com">Email Us</a>
-              <a href="https://www.facebook.com/profile.php?id=61583709642144" target="_blank">Facebook</a>
-            </div>
-          </div>
-        </section>
-      </main>
-    </div>
+    <div id="site-footer"></div>
 
+    <script src="js/data.js"></script>
+    <script src="js/site.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/products.js"></script>
     <script>
-      const navButtons = document.querySelectorAll('.nav button');
-      const sections = document.querySelectorAll('.section');
-
-      navButtons.forEach(button => {
-        button.addEventListener('click', () => {
-          navButtons.forEach(btn => btn.classList.remove('active'));
-          button.classList.add('active');
-          sections.forEach(section => section.classList.remove('active'));
-          document.getElementById(button.dataset.target).classList.add('active');
-        });
+      window.LS_READY.then(function () {
+        window.renderFeatured('featured-grid');
       });
 
-      const cart = [];
-      const cartItems = document.getElementById('cart-items');
-      const cartTotal = document.getElementById('cart-total');
-
-      function renderCart() {
-        if (cart.length === 0) {
-          cartItems.innerHTML = 'Your cart is empty.';
-          cartTotal.textContent = 'Cart total: R0.00';
-          return;
-        }
-
-        let total = 0;
-        cartItems.innerHTML = cart.map(item => {
-          total += item.price * item.quantity;
-          return `<div class="cart-item"><span>${item.name} x${item.quantity}</span><span>R${(item.price * item.quantity).toFixed(2)}</span></div>`;
-        }).join('');
-        cartTotal.textContent = `Cart total: R${total.toFixed(2)}`;
-      }
-
-      document.querySelectorAll('.add-to-cart').forEach(button => {
-        button.addEventListener('click', () => {
-          const existing = cart.find(item => item.name === button.dataset.name);
-          if (existing) {
-            existing.quantity += 1;
-          } else {
-            cart.push({ name: button.dataset.name, price: Number(button.dataset.price), quantity: 1 });
-          }
-          renderCart();
-        });
-      });
-
-      document.getElementById('shipping-form').addEventListener('submit', (event) => {
+      document.getElementById('newsletter-form').addEventListener('submit', function (event) {
         event.preventDefault();
-        const postal = document.getElementById('postal').value.trim();
-        const output = document.getElementById('shipping-output');
-        const cartValue = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
-
-        if (!postal) {
-          output.innerHTML = '<p>Please enter a postal code.</p>';
+        var email = document.getElementById('newsletter-email').value.trim();
+        var note = document.getElementById('newsletter-result');
+        if (!email || email.indexOf('@') === -1) {
+          note.innerHTML = '<span class="alert warning" style="display:inline-block;">Please enter a valid email address.</span>';
           return;
         }
-
-        const shippingRate = postal.startsWith('2') ? 85 : 120;
-        const freeShipping = cartValue >= 500;
-        const total = cartValue + (freeShipping ? 0 : shippingRate);
-        output.innerHTML = `
-          <p><strong>Customer:</strong> ${document.getElementById('name').value || 'Guest'}</p>
-          <p><strong>Shipping fee:</strong> R${(freeShipping ? 0 : shippingRate).toFixed(2)}</p>
-          <p><strong>Total to pay:</strong> R${total.toFixed(2)}</p>
-        `;
+        var mailto = 'mailto:sthandiweluthuli322@gmail.com?subject=' +
+          encodeURIComponent('VIP List signup') + '&body=' +
+          encodeURIComponent('Please add me to the LuthuliScents VIP list.\nEmail: ' + email);
+        window.location.href = mailto;
+        note.innerHTML = '<span class="alert success" style="display:inline-block;">Opening your email app — welcome to the VIP list.</span>';
       });
     </script>
   </body>
