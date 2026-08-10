@@ -134,11 +134,11 @@ SHIPPING = {
 # Vercel serverless function that creates a Yoco hosted checkout from the
 # cart (holds YOCO_SECRET_KEY server-side). Replace <project> after you deploy
 # to Vercel and copy the .vercel.app URL. See api/README.md.
-YOCO_CHECKOUT_API = "https://<project>.vercel.app/api/create-checkout"
+YOCO_CHECKOUT_API = "https://luthuliscents.vercel.app/api/create-checkout"
 
 # Vercel serverless function that proxies BobGo tracking for the Track page
 # (holds BOBGO_API_KEY server-side). Same <project>.vercel.app host as above.
-BOBGO_TRACK_API = "https://<project>.vercel.app/api/bob-track"
+BOBGO_TRACK_API = "https://luthuliscents.vercel.app/api/bob-track"
 
 
 def build_products() -> None:
