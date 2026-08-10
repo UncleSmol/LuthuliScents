@@ -113,11 +113,12 @@
 
     var eyebrow = body.getAttribute('data-hero-eyebrow') || '';
     var subtitle = body.getAttribute('data-hero-subtitle') || '';
-    var side = body.getAttribute('data-hero-side') === 'right' ? 'logo-right' : 'logo-left';
     var cta = body.getAttribute('data-hero-cta-label');
     var ctaHref = body.getAttribute('data-hero-cta-href');
     var cta2 = body.getAttribute('data-hero-cta2-label');
     var cta2Href = body.getAttribute('data-hero-cta2-href');
+    var floatImg = body.getAttribute('data-hero-float');
+    var floatLeftImg = body.getAttribute('data-hero-float-left');
 
     var text = '';
     if (eyebrow) text += '<div class="eyebrow">' + escapeAttr(eyebrow) + '</div>';
@@ -131,12 +132,13 @@
     }
 
     var hero = document.createElement('section');
-    hero.className = 'hero ' + side;
+    hero.className = 'hero';
     hero.innerHTML =
       '<div class="hero-inner">' +
-      '<img class="hero-logo" src="img/logo.jpeg" alt="LuthuliScents logo">' +
       '<div class="hero-text">' + text + '</div>' +
-      '</div>';
+      '</div>' +
+      (floatImg ? '<img class="hero-float" src="img/' + escapeAttr(floatImg) + '" alt="" />' : '') +
+      (floatLeftImg ? '<img class="hero-float left" src="img/' + escapeAttr(floatLeftImg) + '" alt="" />' : '');
     el.appendChild(hero);
   }
 
