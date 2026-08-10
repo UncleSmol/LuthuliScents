@@ -13,6 +13,7 @@
     { key: 'about', label: 'About', href: 'about.html' },
     { key: 'products', label: 'Products', href: 'products.html' },
     { key: 'contact', label: 'Contact', href: 'contact.html' },
+    { key: 'track', label: 'Track order', href: 'track.html' },
     { key: 'cart', label: 'Cart', href: 'cart.html' }
   ];
 

@@ -114,5 +114,6 @@
     ],
     "free_shipping_threshold": 500.0
   },
-  "yoco_checkout_link": "https://<project>.vercel.app/api/create-checkout"
+  "yoco_checkout_link": "https://<project>.vercel.app/api/create-checkout",
+  "tracking_api": "https://<project>.vercel.app/api/bob-track"
 }

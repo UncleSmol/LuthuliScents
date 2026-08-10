@@ -136,6 +136,10 @@ SHIPPING = {
 # to Vercel and copy the .vercel.app URL. See api/README.md.
 YOCO_CHECKOUT_API = "https://<project>.vercel.app/api/create-checkout"
 
+# Vercel serverless function that proxies BobGo tracking for the Track page
+# (holds BOBGO_API_KEY server-side). Same <project>.vercel.app host as above.
+BOBGO_TRACK_API = "https://<project>.vercel.app/api/bob-track"
+
 
 def build_products() -> None:
     """Write the catalog the browser loads (data/products.json)."""
@@ -146,6 +150,7 @@ def build_products() -> None:
         "social_links": SOCIAL_LINKS,
         "shipping": SHIPPING,
         "yoco_checkout_link": YOCO_CHECKOUT_API,
+        "tracking_api": BOBGO_TRACK_API,
     }
     out = DATA_DIR / "products.json"
     out.write_text(json.dumps(payload, indent=2, ensure_ascii=False), encoding="utf-8")

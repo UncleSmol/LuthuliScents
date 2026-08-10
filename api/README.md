@@ -49,6 +49,13 @@ Yoco requires you to verify the domain that redirects back after payment
 activate. In the Yoco app: **Sales → Payment Gateway → Verified domains**.
 Use `sk_test_...` while building, `sk_live_...` for production.
 
+> **Key gotcha — publishable vs secret keys.** Yoco publishable keys start
+> with `pk_` (e.g. `pk_live_...`) and are only for the browser. `api/create-checkout.js`
+> calls Yoco's API with `Authorization: Bearer <YOCO_SECRET_KEY>`, so it needs the
+> **secret** key, which starts with `sk_`. If a `pk_` key is in `.env`/Vercel under
+> `YOCO_SECRET_KEY`, checkout will fail. Fix: Yoco dashboard → **Settings → API keys**
+> → **Secret key** (the `sk_...` value, not the publishable `pk_...` one).
+
 ## Local testing
 
 ```bash
@@ -65,3 +72,64 @@ curl -X POST http://localhost:3000/api/create-checkout \
 - `YOCO_SECRET_KEY` is a secret — set it as a Vercel env var, never commit it.
 - Amounts are validated server-side (min R2.00). Confirm actual receipt via
   Yoco's `payment.succeeded` webhook in production, not the `successUrl`.
+
+---
+
+# LuthuliScents — Bob Go tracking function (Vercel serverless)
+
+Second serverless function: `api/bob-track.js` proxies Bob Go's courier
+tracking so the static Track page (`track.html`) can show live parcel status
+without ever exposing your `BOBGO_API_KEY` to the browser.
+
+## Flow
+
+1. The customer opens `track.html` and enters the waybill / tracking
+   reference you gave them (Bob Go issues it when you book the courier).
+2. `js/track.js` calls this function: `GET /api/bob-track?ref=UASDRW78`.
+3. The function forwards to Bob Go
+   `GET {base}/tracking?tracking_reference=<ref>` with
+   `Authorization: Bearer <BOBGO_API_KEY>` and returns a normalised
+   `{ ok, reference, status, events: [...] }` timeline for the page.
+
+## Env vars (Vercel → Project → Settings → Environment Variables)
+
+- `BOBGO_API_KEY` — required. Bearer token from the Bob Go app
+  (Settings → API). Your `4b...` sandbox key works against the sandbox base.
+- `BOBGO_BASE_URL` — optional. Defaults to the **sandbox**
+  `https://api.sandbox.bobgo.co.za/v2`. Switch to
+  `https://api.bobgo.co.za/v2` for production (with a live key).
+
+## Deploy
+
+Same project as the Yoco function — there is no extra project to create.
+After deploying you get `https://<project>.vercel.app`; the tracking endpoint
+is `https://<project>.vercel.app/api/bob-track`.
+
+Edit the constant in `build.py`:
+```python
+BOBGO_TRACK_API = "https://<project>.vercel.app/api/bob-track"
+```
+then regenerate:
+```bash
+python build.py products
+```
+
+## Local testing
+
+```bash
+# env present (see .env.example)
+vercel dev
+curl "http://localhost:3000/api/bob-track?ref=UASDRW78" -i
+```
+
+Expected: either a `{ ok: true, status: "...", events: [...] }` body for a
+valid reference, or a clean `400`/`502` error object. Sandbox accounts can
+create test shipments (they return tracking references) to verify the
+timeline renders.
+
+## How the reference reaches the customer
+
+Fulfilment is manual (Yoco payment → WhatsApp handoff → you book the courier
+on Bob Go). When you book, Bob Go issues a tracking reference / waybill;
+send that to the buyer (e.g. in the WhatsApp reply). They enter it on
+`track.html`. No order sync or webhook is required for this flow.
