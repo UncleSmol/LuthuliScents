@@ -1,8 +1,14 @@
-# LuthuliScents — Yoco checkout function (Vercel serverless)
+# LuthuliScents — Yoco checkout function (Vercel, Python)
 
 One serverless function that turns the customer's **actual cart** into a Yoco
 hosted payment link. It is the only place your Yoco secret key lives — it must
 never go in the static site's HTML/JS.
+
+**Runtime:** Python. [+`api/create-checkout.py`]. Each `api/*.py` file with a
+`handler` class inheriting from `http.server.BaseHTTPRequestHandler` becomes a
+Vercel Function routed to `/api/<filename>` (see
+[Vercel Python runtime docs](https://vercel.com/docs/functions/runtimes/python#python-entrypoints)).
+Both functions use only the Python standard library — no pip deps.
 
 ## Flow
 
@@ -18,7 +24,7 @@ never go in the static site's HTML/JS.
 
 Create the project in the Vercel dashboard (import your GitHub repo, Framework
 Preset = **Other**). This repo has no framework, so Vercel serves the static
-files at root and treats `api/create-checkout.js` as a serverless function.
+files at root and treats `api/*.py` as serverless functions.
 
 Set the environment variable (never commit it):
 - Vercel dashboard → Project → Settings → Environment Variables
@@ -27,6 +33,10 @@ Set the environment variable (never commit it):
 
 Deploy via `vercel --prod` or push to your `main` branch if you enabled
 Git integration.
+
+> Only `requirements.txt` is installed into the Function bundle. If you want
+> to slim the bundle, add a `vercel.json` `functions` rule with `excludeFiles`
+> (docs above) so static assets like `img/` don't ship into each Function.
 
 ## Point the static site at your function
 
@@ -50,7 +60,7 @@ activate. In the Yoco app: **Sales → Payment Gateway → Verified domains**.
 Use `sk_test_...` while building, `sk_live_...` for production.
 
 > **Key gotcha — publishable vs secret keys.** Yoco publishable keys start
-> with `pk_` (e.g. `pk_live_...`) and are only for the browser. `api/create-checkout.js`
+> with `pk_` (e.g. `pk_live_...`) and are only for the browser. `api/create-checkout.py`
 > calls Yoco's API with `Authorization: Bearer <YOCO_SECRET_KEY>`, so it needs the
 > **secret** key, which starts with `sk_`. If a `pk_` key is in `.env`/Vercel under
 > `YOCO_SECRET_KEY`, checkout will fail. Fix: Yoco dashboard → **Settings → API keys**
@@ -59,7 +69,7 @@ Use `sk_test_...` while building, `sk_live_...` for production.
 ## Local testing
 
 ```bash
-# run the function locally with a key present
+# run the functions locally with a key present
 set YOCO_SECRET_KEY=sk_test_your_key_here   # PowerShell
 vercel dev
 curl -X POST http://localhost:3000/api/create-checkout \
@@ -75,9 +85,9 @@ curl -X POST http://localhost:3000/api/create-checkout \
 
 ---
 
-# LuthuliScents — Bob Go tracking function (Vercel serverless)
+# LuthuliScents — Bob Go tracking function (Vercel, Python)
 
-Second serverless function: `api/bob-track.js` proxies Bob Go's courier
+Second serverless function: `api/bob-track.py` proxies Bob Go's courier
 tracking so the static Track page (`track.html`) can show live parcel status
 without ever exposing your `BOBGO_API_KEY` to the browser.
 
