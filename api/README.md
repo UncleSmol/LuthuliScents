@@ -173,7 +173,7 @@ page button "Generate & copy Yoco payment link".
   `https://api.bobgo.co.za/v2` for live rates.
 - `BOBGO_COLLECTION_ADDRESS` — **required JSON** of your pickup address, e.g.:
   ```json
-  {"company":"LuthuliScents","street_address":"1 Main Road","local_area":"","city":"Johannesburg","zone":"Gauteng","country":"ZA","code":"2196"}
+  {"company":"LuthuliScents","street_address":"46 Loveday Street, Trump Center Building, Wemmer","local_area":"Selby","city":"Johannesburg","zone":"Gauteng","country":"ZA","code":"2092"}
   ```
 - `BOBGO_COLLECTION_NAME` / `BOBGO_COLLECTION_PHONE` / `BOBGO_COLLECTION_EMAIL`
   — the collection contact. Bob Go requires a **phone or email** for both the
