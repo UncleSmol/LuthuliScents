@@ -131,7 +131,11 @@ class handler(BaseHTTPRequestHandler):
 
         req = urllib.request.Request(
             url,
-            headers={"Authorization": "Bearer " + key, "Accept": "application/json"},
+            headers={
+                "Authorization": "Bearer " + key,
+                "Accept": "application/json",
+                "User-Agent": "LuthuliScents/2.0 (+https://luthuli-scents.vercel.app)",
+            },
         )
 
         try:
