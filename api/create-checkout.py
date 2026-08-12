@@ -60,7 +60,7 @@ class handler(BaseHTTPRequestHandler):
         self.end_headers()
 
     def do_POST(self):
-        key = os.environ.get("YOCO_SECRET_KEY", "")
+        key = os.environ.get("YOCO_SECRET_KEY", "").strip()
         if not key:
             self._json(
                 500,
@@ -123,10 +123,11 @@ class handler(BaseHTTPRequestHandler):
                 data = json.loads(res.read().decode("utf-8"))
         except urllib.error.HTTPError as err:
             status = err.code
+            raw = err.read().decode("utf-8", "replace")
             try:
-                data = json.loads(err.read().decode("utf-8"))
+                data = json.loads(raw)
             except (ValueError, json.JSONDecodeError):
-                data = {}
+                data = {"raw": raw}
         except Exception as exc:
             self._json(502, {"error": "Could not reach Yoco: {0}".format(exc)})
             return
@@ -135,7 +136,8 @@ class handler(BaseHTTPRequestHandler):
             description = (
                 data.get("description")
                 or data.get("errorType")
-                or "Yoco checkout failed"
+                or data.get("errorCode")
+                or (data.get("raw") if data.get("raw") else "Yoco checkout failed")
             )
             self._json(status, {"error": description, "detail": data})
             return
