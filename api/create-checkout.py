@@ -114,6 +114,7 @@ class handler(BaseHTTPRequestHandler):
                 "Content-Type": "application/json",
                 "Authorization": "Bearer " + key,
                 "Idempotency-Key": str(uuid.uuid4()),
+                "User-Agent": "LuthuliScents/2.0 (+https://luthuli-scents.vercel.app)",
             },
         )
 
