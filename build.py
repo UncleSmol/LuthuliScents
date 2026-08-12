@@ -25,6 +25,8 @@ PRODUCTS = [
         "family": "Female",
         "price": 180.00,
         "size": "50ml",
+        "weight_kg": 0.3,
+        "dimensions_cm": {"length": 10, "width": 6, "height": 6},
         "image": "img/WhatsApp Image 2026-05-27 at 09.07.42.jpeg",
         "tagline": "Long-lasting, blooming florals",
         "notes": "Peony, rose water, soft musk",
@@ -38,6 +40,8 @@ PRODUCTS = [
         "family": "Unisex",
         "price": 180.00,
         "size": "50ml",
+        "weight_kg": 0.3,
+        "dimensions_cm": {"length": 10, "width": 6, "height": 6},
         "image": "img/WhatsApp Image 2026-05-27 at 09.05.30.jpeg",
         "tagline": "Crisp, juicy and long-lasting",
         "notes": "Red apple, fresh green accord, vanilla",
@@ -51,6 +55,8 @@ PRODUCTS = [
         "family": "Unisex",
         "price": 180.00,
         "size": "50ml",
+        "weight_kg": 0.3,
+        "dimensions_cm": {"length": 10, "width": 6, "height": 6},
         "image": "img/apple blaze.jpeg",
         "tagline": "A fiery caramelised apple accord",
         "notes": "Baked apple, warm amber, caramel",
@@ -64,6 +70,8 @@ PRODUCTS = [
         "family": "Male",
         "price": 180.00,
         "size": "50ml",
+        "weight_kg": 0.3,
+        "dimensions_cm": {"length": 10, "width": 6, "height": 6},
         "image": "img/woody2.png",
         "tagline": "Bold, masculine, grounded",
         "notes": "Cedarwood, sandalwood, smoky vetiver",
@@ -77,6 +85,8 @@ PRODUCTS = [
         "family": "Female",
         "price": 180.00,
         "size": "50ml",
+        "weight_kg": 0.3,
+        "dimensions_cm": {"length": 10, "width": 6, "height": 6},
         "image": "img/IMG-20260429-WA0066.jpg",
         "tagline": "Mysterious and sensual",
         "notes": "Blackberry, dark plum, amber musk",
@@ -90,6 +100,8 @@ PRODUCTS = [
         "family": "Unisex",
         "price": 180.00,
         "size": "50ml",
+        "weight_kg": 0.3,
+        "dimensions_cm": {"length": 10, "width": 6, "height": 6},
         "image": "img/sweetapple.jpeg",
         "tagline": "Rosy apple, fresh and fun",
         "notes": "Ripe apple, rose petals, sugar",
@@ -103,6 +115,8 @@ PRODUCTS = [
         "family": "Unisex",
         "price": 180.00,
         "size": "50ml",
+        "weight_kg": 0.3,
+        "dimensions_cm": {"length": 10, "width": 6, "height": 6},
         "image": "img/WhatsApp Image 2026-05-11 at 14.58.30.jpeg",
         "tagline": "The house signature — timeless luxury",
         "notes": "Golden amber, white florals, oud",
@@ -140,6 +154,10 @@ YOCO_CHECKOUT_API = "https://luthuli-scents.vercel.app/api/create-checkout"
 # (holds BOBGO_API_KEY server-side). Same <project>.vercel.app host as above.
 BOBGO_TRACK_API = "https://luthuli-scents.vercel.app/api/bob-track"
 
+# Vercel serverless function that returns a live BobGo shipping quote + a Yoco
+# payment link for that total, so the owner can copy it into WhatsApp.
+QUOTE_CHECKOUT_API = "https://luthuli-scents.vercel.app/api/quote-checkout"
+
 
 def build_products() -> None:
     """Write the catalog the browser loads (data/products.json)."""
@@ -151,6 +169,7 @@ def build_products() -> None:
         "shipping": SHIPPING,
         "yoco_checkout_link": YOCO_CHECKOUT_API,
         "tracking_api": BOBGO_TRACK_API,
+        "quote_checkout_api": QUOTE_CHECKOUT_API,
     }
     out = DATA_DIR / "products.json"
     out.write_text(json.dumps(payload, indent=2, ensure_ascii=False), encoding="utf-8")
